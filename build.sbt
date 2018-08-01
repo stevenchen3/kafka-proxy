@@ -23,15 +23,18 @@ lazy val commonSettings = Seq(
   ),
   javaOptions in Test ++= Seq("-Xms256m", "-Xmx2g", "-Dconfig.resource=test.conf"),
   javaOptions in run  ++= Seq("-Xms256m", "-Xmx2g", "-XX:+UseParallelGC", "-server"),
-  resolvers += Resolver.sonatypeRepo("releases"),
-  javaOptions in Universal := (javaOptions in run).value // propagate `run` settings to packaging scripts
+  resolvers += Resolver.sonatypeRepo("releases")
 )
 
 lazy val root = Project(id = "kafka-proxy", base = file("."))
-  .enablePlugins(JavaServerAppPackaging, UniversalPlugin)
   .settings(commonSettings: _*)
   .settings(fork in run := true)
   .settings(fork in Test := true)
   .settings(libraryDependencies ++= akkaDeps)
   .settings(libraryDependencies ++= akkaHttpDeps)
   .settings(libraryDependencies ++= kafkaDeps)
+
+assemblyMergeStrategy in assembly := {
+ case PathList("META-INF", xs @ _*) ⇒ MergeStrategy.discard
+ case x ⇒ MergeStrategy.first
+}

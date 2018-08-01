@@ -1,13 +1,5 @@
 resolvers += Resolver.typesafeRepo("releases")
 
-libraryDependencies += "com.geirsson" %% "scalafmt-bootstrap" % "0.6.6"
-
-// Add the sbt-scalariform plugin
-//addSbtPlugin("org.scalariform" % "sbt-scalariform" % "1.6.0")
-// Add the sbt-doctest plugin
-addSbtPlugin("com.github.tkawachi" % "sbt-doctest" % "0.5.0")
-// Add the sbt-packager plugin
-addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.1.4")
 // Add the code coverage plugin
 addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.5.0")
 // Add the scala style check plugin
@@ -20,3 +12,5 @@ addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.8.2")
 
 // sbt plugin for scapegoat scala static analysis plugin
 addSbtPlugin("com.sksamuel.scapegoat" %% "sbt-scapegoat" % "1.0.4")
+
+addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.5")
