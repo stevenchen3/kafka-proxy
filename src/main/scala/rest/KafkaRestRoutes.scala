@@ -22,7 +22,7 @@ trait KafkaRestRoutes extends JsonSupport {
 
   def kafkaProducerActor: ActorRef
 
-  implicit lazy val timeout = Timeout(5.seconds)
+  implicit lazy val timeout = Timeout(60.seconds)
 
   lazy val kafkaRestRoutes: Route =
     pathPrefix("topics" / Segment) { topic ⇒
