@@ -1,3 +1,5 @@
+package io.alphash.kafka.proxy.rest
+
 import akka.actor.{ActorRef, ActorSystem}
 import akka.event.Logging
 import akka.http.scaladsl.Http

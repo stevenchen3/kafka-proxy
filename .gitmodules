@@ -1,3 +1,6 @@
 [submodule "docker-common"]
 	path = docker-common
 	url = git@github.com:stevenchen3/docker-common.git
+[submodule "shell"]
+	path = shell
+	url = git@github.com:stevenchen3/shell.git

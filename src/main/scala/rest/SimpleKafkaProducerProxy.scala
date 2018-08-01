@@ -1,3 +1,5 @@
+package io.alphash.kafka.proxy.rest
+
 import java.util.Properties;
 
 

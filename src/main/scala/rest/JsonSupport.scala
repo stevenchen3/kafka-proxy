@@ -1,3 +1,5 @@
+package io.alphash.kafka.proxy.rest
+
 import KafkaProducerActor._
 
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
