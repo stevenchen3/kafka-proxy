@@ -1,17 +1,11 @@
 import java.util.Properties;
 
-import org.apache.kafka.clients.{ClientRequest, ClientResponse}
-import org.apache.kafka.common.TopicPartition
-import org.apache.kafka.common.errors.{ApiException, NetworkException}
-import org.apache.kafka.common.metrics.Metrics
-import org.apache.kafka.common.protocol.{ApiKeys, Errors, Protocol}
-import org.apache.kafka.common.record.MemoryRecords
-import org.apache.kafka.common.requests.MetadataResponse.{PartitionMetadata, TopicMetadata}
-import org.apache.kafka.common.requests.ProduceResponse.PartitionResponse
-import org.apache.kafka.common.requests._
 
+import org.apache.kafka.clients.producer.Callback
 import org.apache.kafka.clients.producer.KafkaProducer
-import org.apache.kafka.clients.producer.{ProducerConfig, ProducerRecord, RecordMetadata}
+import org.apache.kafka.clients.producer.ProducerConfig
+import org.apache.kafka.clients.producer.ProducerRecord
+import org.apache.kafka.clients.producer.RecordMetadata
 import org.apache.kafka.common.utils.Utils
 
 final class SimpleKafkaProducerProxy extends KafkaProducerProxy {
@@ -32,9 +26,32 @@ final class SimpleKafkaProducerProxy extends KafkaProducerProxy {
     properties
   }
 
+  def getPayload(record: Record, base64Decode: Boolean): Array[Byte] = {
+    import java.util.Base64
+    if (base64Decode) {
+      Base64.getDecoder.decode(record.value)
+    } else {
+      record.value.getBytes
+    }
+  }
+
   def publish(topic: String, message: Message): Unit= {
-    val producer: KafkaProducer[Array[Byte], Array[Byte]] = new KafkaProducer(props)
-    //val record: ProducerRecord[Array[Byte], Array[Byte]] = 
+    val producerProps = props
+    val producer: KafkaProducer[Array[Byte], Array[Byte]] = new KafkaProducer(producerProps)
+    producer.initTransactions
+    producer.beginTransaction
+    message.records.map { r ⇒
+      val base64Decode = producerProps.getProperty("enable.base64.decode", "false").toBoolean
+      producer.send(new ProducerRecord(topic, getPayload(r, base64Decode)), SimpleCallback())
+    }
+    producer.commitTransaction
+    producer.flush
+    producer.close
+  }
+}
+
+final case class SimpleCallback() extends Callback {
+  def onCompletion(m: RecordMetadata, e: Exception): Unit = {
   }
 }
 
