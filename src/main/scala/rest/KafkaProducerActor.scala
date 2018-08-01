@@ -1,4 +1,4 @@
-import akka.actor.{ Actor, ActorLogging, Props }
+import akka.actor.{Actor, ActorLogging, Props}
 
 final case class Record(value: String)
 final case class Message(records: Seq[Record])
@@ -15,9 +15,8 @@ class KafkaProducerActor extends Actor with ActorLogging {
 
   def receive: Receive = {
     case Publish(topic, message) ⇒
-      // TODO: do the work of publishing to Kafka here
-      //
-      sender() ! ActionPerformed(s"Message published.")
-    case _ ⇒ sender() ! ActionPerformed("Operation not allowed.")
+      SimpleKafkaProducerProxy().publish(topic, message)
+      sender() ! ActionPerformed("Message published")
+    case _ ⇒ sender() ! ActionPerformed("Operation not allowed")
   }
 }
