@@ -1,0 +1,3 @@
+[submodule "docker-common"]
+	path = docker-common
+	url = git@github.com:stevenchen3/docker-common.git
