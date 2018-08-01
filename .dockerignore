@@ -1,0 +1,5 @@
+.git
+project
+target/streams
+target/protobuf_external
+target/resolution-cache

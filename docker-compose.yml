@@ -5,13 +5,13 @@ services:
     build:
       context: docker-common
       dockerfile: Dockerfile.jre8
-    image: centos:jre8
+    image: centos-base:jre8
     entrypoint: /bin/bash
 
   scakafka-proxy:
     build:
-      context: docker
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: docker/Dockerfile
     image: scakafka-proxy:0.9.0-SNAPSHOT
     depends_on:
       - base
