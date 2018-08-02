@@ -12,6 +12,9 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile
+      args:
+        - SCALA_VERSION=2.12
+        - KAFKA_PROXY_VERSION=0.9.0-SNAPSHOT
     image: kafka-proxy:0.9.0-SNAPSHOT
     depends_on:
       - base

@@ -12,5 +12,5 @@ function configure() {
   generate_config ${CONFIG} _BUFFER_MEMORY_BYTES_ ${BUFFER_MEMORY_BYTES:-16777216}
 }
 
-configure /etc/kafka-proxy/producer.properties
+configure ${KAFKA_PROXY_CONF}/producer.properties
 exec java -cp ${KAFKA_PROXY_HOME}/lib/* io.alphash.kafka.proxy.rest.SimpleRestServer
