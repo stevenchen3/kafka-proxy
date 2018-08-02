@@ -14,7 +14,7 @@ final class SimpleKafkaProducerProxy extends KafkaProducerProxy {
   lazy val producerConfig =
     System.getProperty("config.file", "/etc/kafka-proxy/producer.properties")
 
-  val props: Properties = {
+  lazy val props: Properties = {
     val properties: Properties = new Properties()
     properties.putAll(Utils.loadProps(producerConfig))
     properties.put(
@@ -27,6 +27,10 @@ final class SimpleKafkaProducerProxy extends KafkaProducerProxy {
     )
     properties
   }
+
+  lazy val base64Decode: Boolean =
+    props.getProperty("enable.base64.decode", "false").toBoolean
+
 
   def getPayload(record: Record, base64Decode: Boolean): Array[Byte] = {
     import java.util.Base64
@@ -43,7 +47,6 @@ final class SimpleKafkaProducerProxy extends KafkaProducerProxy {
     producer.initTransactions
     producer.beginTransaction
     message.records.map { r ⇒
-      val base64Decode = producerProps.getProperty("enable.base64.decode", "false").toBoolean
       producer.send(new ProducerRecord(topic, getPayload(r, base64Decode)), SimpleCallback())
     }
     producer.commitTransaction
