@@ -25,7 +25,7 @@ object Dependencies {
   )
 
   // Apache Kafka libaray dependencies
-  lazy val kafkaVersion = "2.0.0"
+  lazy val kafkaVersion = "1.1.0"
   val kafkaDeps = Seq(
     "org.apache.kafka" %% "kafka",
     "org.apache.kafka" % "kafka-clients"
