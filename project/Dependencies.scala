@@ -2,7 +2,7 @@ import sbt._
 
 object Dependencies {
   // Akka main library dependencies
-  lazy val akkaVersion = "2.5.11"
+  lazy val akkaVersion = "2.5.14"
   val akkaDeps = Seq(
     "com.typesafe.akka" %% "akka-stream",
     "com.typesafe.akka" %% "akka-stream-testkit",
@@ -10,7 +10,7 @@ object Dependencies {
   ).map(_ % akkaVersion)
 
   // Akka HTTP library dependencies
-  lazy val akkaHttpVersion = "10.0.11"
+  lazy val akkaHttpVersion = "10.1.3"
   val akkaHttpDeps = Seq(
     "com.typesafe.akka" %% "akka-http",
     "com.typesafe.akka" %% "akka-http-testkit",
