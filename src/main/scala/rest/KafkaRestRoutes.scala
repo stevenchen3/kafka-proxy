@@ -22,21 +22,20 @@ trait KafkaRestRoutes extends JsonSupport {
   lazy val log = Logging(system, classOf[KafkaRestRoutes])
 
   //def kafkaProducerActor: ActorRef
-  //val kafkaProducerActor: ActorRef = system.actorOf(KafkaProducerActor.props, "kafkaProducerActor")
 
-  implicit lazy val timeout = Timeout(60.seconds)
+  implicit lazy val timeout = Timeout(5.seconds)
 
   lazy val kafkaRestRoutes: Route =
     pathPrefix("topics" / Segment) { topic ⇒
       pathEnd {
         post {
           entity(as[Message]) { message ⇒
-            val kafkaProducerActor = system.actorOf(KafkaProducerActor.props)
-            val messagePublished: Future[ActionPerformed] =
+            val kafkaProducerActor: ActorRef = system.actorOf(KafkaProducerActor.props)
+            val future: Future[ActionPerformed] =
               (kafkaProducerActor ? Publish(topic, message)).mapTo[ActionPerformed]
 
-            onSuccess(messagePublished) { performed ⇒
-              complete((StatusCodes.Created, performed))
+            onSuccess(future) { result ⇒
+              complete((StatusCodes.Created, result))
             }
           } // end of 'entity'
         }

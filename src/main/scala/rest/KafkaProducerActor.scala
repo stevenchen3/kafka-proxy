@@ -18,7 +18,7 @@ class KafkaProducerActor extends Actor with ActorLogging {
   def receive: Receive = {
     case Publish(topic, message) ⇒
       SimpleKafkaProducerProxy().publish(topic, message)
-      sender() ! ActionPerformed("Message published")
-    case _ ⇒ sender() ! ActionPerformed("Operation not allowed")
+      sender() ! ActionPerformed("OK")
+    case _ ⇒ sender() ! ActionPerformed("Bad request")
   }
 }
