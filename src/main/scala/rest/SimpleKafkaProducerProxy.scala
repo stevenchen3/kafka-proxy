@@ -2,7 +2,6 @@ package io.alphash.kafka.proxy.rest
 
 import java.util.Properties;
 
-
 import org.apache.kafka.clients.producer.Callback
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.ProducerConfig
@@ -31,7 +30,6 @@ final class SimpleKafkaProducerProxy extends KafkaProducerProxy {
   lazy val base64Decode: Boolean =
     props.getProperty("enable.base64.decode", "false").toBoolean
 
-
   def getPayload(record: Record, base64Decode: Boolean): Array[Byte] = {
     import java.util.Base64
     if (base64Decode) {
@@ -42,22 +40,20 @@ final class SimpleKafkaProducerProxy extends KafkaProducerProxy {
   }
 
   def publish(topic: String, message: Message): Unit= {
-    val producerProps = props
-    val producer: KafkaProducer[Array[Byte], Array[Byte]] = new KafkaProducer(producerProps)
-    producer.initTransactions
-    producer.beginTransaction
+    val producer: KafkaProducer[Array[Byte], Array[Byte]] = new KafkaProducer(props)
+    //producer.initTransactions
+    //producer.beginTransaction
     message.records.map { r ⇒
       producer.send(new ProducerRecord(topic, getPayload(r, base64Decode)), SimpleCallback())
     }
-    producer.commitTransaction
-    producer.flush
+    //producer.commitTransaction
+    //producer.flush
     producer.close
   }
 }
 
 final case class SimpleCallback() extends Callback {
-  def onCompletion(m: RecordMetadata, e: Exception): Unit = {
-  }
+  def onCompletion(m: RecordMetadata, e: Exception): Unit = {}
 }
 
 object SimpleKafkaProducerProxy {

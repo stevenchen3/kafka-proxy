@@ -38,7 +38,11 @@ trait KafkaRestRoutes extends JsonSupport {
               complete((StatusCodes.Created, result))
             }
           } // end of 'entity'
+        } ~
+        // For routing test
+        get {
+          complete((StatusCodes.OK, ActionPerformed("OK")))
         }
-      } // end of 'post'
+      }
     }
 }
