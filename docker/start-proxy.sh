@@ -13,4 +13,5 @@ function configure() {
 }
 
 configure ${KAFKA_PROXY_CONF}/producer.properties
-exec java -cp ${KAFKA_PROXY_HOME}/lib/* io.alphash.kafka.proxy.rest.SimpleRestServer
+JVM_OPTS="-Xms${HEAP_SIZE_MIN:-1g} -Xmx${HEAP_SIZE_MAX:-2g}"
+exec java ${JVM_OPTS} -cp ${KAFKA_PROXY_HOME}/lib/* io.alphash.kafka.proxy.rest.SimpleRestServer
