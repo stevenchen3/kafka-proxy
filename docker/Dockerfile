@@ -19,7 +19,7 @@ COPY shell/config-utils.sh      ${KAFKA_PROXY_HOME}/bin
 
 RUN set -ex && \
     ln -s ${KAFKA_PROXY_HOME}/bin/* /usr/local/bin/ && \
-    ln -s ${KAFKA_PROXY_HOME}/config/producer.properties ${KAFKA_PROXY_CONF}/producer.properties
+    ln -s ${KAFKA_PROXY_HOME}/config/producer.properties ${KAFKA_PROXY_CONF}/
 
 EXPOSE 8080
 

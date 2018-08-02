@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ${PWD}/config-utils.sh
+source ${KAFKA_PROXY_HOME}/bin/config-utils.sh
 
 function configure() {
   local CONFIG=$1
@@ -12,6 +12,6 @@ function configure() {
   generate_config ${CONFIG} _BUFFER_MEMORY_BYTES_ ${BUFFER_MEMORY_BYTES:-16777216}
 }
 
-configure ${KAFKA_PROXY_CONF}/producer.properties
+configure ${KAFKA_PROXY_HOME}/config/producer.properties
 JVM_OPTS="-Xms${HEAP_SIZE_MIN:-1g} -Xmx${HEAP_SIZE_MAX:-2g}"
 exec java ${JVM_OPTS} -cp ${KAFKA_PROXY_HOME}/lib/* io.alphash.kafka.proxy.rest.SimpleRestServer

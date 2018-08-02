@@ -11,8 +11,7 @@ import org.apache.kafka.clients.producer.RecordMetadata
 import org.apache.kafka.common.utils.Utils
 
 final class SimpleKafkaProducerProxy extends KafkaProducerProxy {
-  val producerConfig: String = "/Users/steven/Desktop/kafka/producer.properties"
-  //val producerConfig: String = "/etc/kafka-proxy/producer.properties"
+  val producerConfig: String = "/etc/kafka-proxy/producer.properties"
 
   val props: Properties = {
     val properties: Properties = new Properties()
