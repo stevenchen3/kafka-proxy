@@ -1,3 +1,3 @@
 # Kafka Proxy
 
-A proxy for Apache Kafka
+A proxy built atop Akka HTTP for Apache Kafka
