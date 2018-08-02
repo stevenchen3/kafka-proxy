@@ -8,10 +8,10 @@ services:
     image: centos-base:jre8
     entrypoint: /bin/bash
 
-  scakafka-proxy:
+  kafka-proxy:
     build:
       context: .
       dockerfile: docker/Dockerfile
-    image: scakafka-proxy:0.9.0-SNAPSHOT
+    image: kafka-proxy:0.9.0-SNAPSHOT
     depends_on:
       - base
