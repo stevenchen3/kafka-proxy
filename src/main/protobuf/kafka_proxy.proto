@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.alphash.kafka.proxy.rpc";
+option java_outer_classname = "KafkaProxyProto";
+option objc_class_prefix = "HLW";
+
+package producer;
+
+// The kafka producer service definition.
+service Producer {
+  // Publishes a message to Kafka broker
+  rpc Publish (PublishRequest) returns (PublishReply) {}
+}
+
+// The request message containing the user's name.
+message PublishRequest {
+  string topic = 1;
+  repeated string records = 2;
+}
+
+// The response message containing the greetings
+message PublishReply {
+  string message = 1;
+}

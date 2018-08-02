@@ -27,6 +27,7 @@ lazy val commonSettings = Seq(
 )
 
 lazy val root = Project(id = "kafka-proxy", base = file("."))
+  .enablePlugins(ProtobufPlugin)
   .settings(commonSettings: _*)
   .settings(fork in run := true)
   .settings(fork in Test := true)
