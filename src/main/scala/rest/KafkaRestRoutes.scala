@@ -2,7 +2,7 @@ package io.alphash.kafka.proxy.rest
 
 import KafkaProducerActor._
 
-import akka.actor.{ ActorRef, ActorSystem }
+import akka.actor.{ActorRef, ActorSystem}
 import akka.event.Logging
 
 import scala.concurrent.duration._
@@ -21,7 +21,8 @@ trait KafkaRestRoutes extends JsonSupport {
 
   lazy val log = Logging(system, classOf[KafkaRestRoutes])
 
-  def kafkaProducerActor: ActorRef
+  //def kafkaProducerActor: ActorRef
+  //val kafkaProducerActor: ActorRef = system.actorOf(KafkaProducerActor.props, "kafkaProducerActor")
 
   implicit lazy val timeout = Timeout(60.seconds)
 
@@ -30,11 +31,11 @@ trait KafkaRestRoutes extends JsonSupport {
       pathEnd {
         post {
           entity(as[Message]) { message ⇒
+            val kafkaProducerActor = system.actorOf(KafkaProducerActor.props)
             val messagePublished: Future[ActionPerformed] =
               (kafkaProducerActor ? Publish(topic, message)).mapTo[ActionPerformed]
 
             onSuccess(messagePublished) { performed ⇒
-              log.info("Published message")
               complete((StatusCodes.Created, performed))
             }
           } // end of 'entity'
