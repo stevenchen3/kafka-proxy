@@ -8,7 +8,7 @@ import akka.stream.ActorMaterializer
 import scala.concurrent.{Await, ExecutionContext}
 import scala.concurrent.duration.Duration
 
-class SimpleRestServer extends KafkaRestRoutes {
+final class SimpleRestServer extends KafkaRestRoutes {
   implicit val system: ActorSystem = ActorSystem("kafka-rest-system")
   implicit val materializer: ActorMaterializer = ActorMaterializer()
   implicit val executionContext: ExecutionContext = system.dispatcher

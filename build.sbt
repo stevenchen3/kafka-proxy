@@ -33,9 +33,3 @@ lazy val root = Project(id = "kafka-proxy", base = file("."))
   .settings(libraryDependencies ++= akkaDeps)
   .settings(libraryDependencies ++= akkaHttpDeps)
   .settings(libraryDependencies ++= kafkaDeps)
-
-assemblyMergeStrategy in assembly := {
- case PathList("reference.conf")    ⇒ MergeStrategy.concat
- case PathList("META-INF", xs @ _*) ⇒ MergeStrategy.discard
- case x ⇒ MergeStrategy.first
-}

@@ -24,9 +24,7 @@ object Dependencies {
     "org.scalamock" %% "scalamock-scalatest-support" % "3.5.0" % Test
   )
 
-  // ScalaCheck library dependencies
-  val scalaCheckDeps = Seq("org.scalacheck" %% "scalacheck" % "1.13.4" % "test")
-
+  // Apache Kafka libaray dependencies
   lazy val kafkaVersion = "2.0.0"
   val kafkaDeps = Seq(
     "org.apache.kafka" %% "kafka",
