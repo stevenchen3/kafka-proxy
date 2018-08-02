@@ -3,7 +3,7 @@ import Dependencies._
 lazy val commonSettings = Seq(
   name := "kafka-proxy",
   organization := "alphash.io",
-  scalaVersion := "2.11.8",
+  scalaVersion := "2.12.4",
   scalacOptions in Compile ++= Seq(
     "-encoding",
     "UTF-8",
