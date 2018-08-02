@@ -2,7 +2,7 @@
 
 A proxy built atop Akka HTTP for Apache Kafka
 
-# Build
+# Building the Docker image
 
 ```
 sbt assembly
