@@ -44,7 +44,8 @@ final class SimpleKafkaProducerProxy extends KafkaProducerProxy {
     //producer.initTransactions
     //producer.beginTransaction
     message.records.map { r ⇒
-      producer.send(new ProducerRecord(topic, getPayload(r, base64Decode)), SimpleCallback())
+      //producer.send(new ProducerRecord(topic, getPayload(r, base64Decode)), SimpleCallback())
+      producer.send(new ProducerRecord(topic, getPayload(r, base64Decode)))
     }
     //producer.commitTransaction
     //producer.flush
@@ -52,9 +53,9 @@ final class SimpleKafkaProducerProxy extends KafkaProducerProxy {
   }
 }
 
-final case class SimpleCallback() extends Callback {
-  def onCompletion(m: RecordMetadata, e: Exception): Unit = {}
-}
+//final case class SimpleCallback() extends Callback {
+//  def onCompletion(m: RecordMetadata, e: Exception): Unit = {}
+//}
 
 object SimpleKafkaProducerProxy {
   def apply() = new SimpleKafkaProducerProxy()
