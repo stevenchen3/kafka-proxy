@@ -8,7 +8,7 @@ option objc_class_prefix = "HLW";
 package producer;
 
 // The Kafka RPC proxy service definition.
-service KafkaProxyRpc {
+service KafkaProxy {
   // Publishes a message to Kafka broker
   rpc Publish (KafkaMessage) returns (PublishReply) {}
 }
