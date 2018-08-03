@@ -21,14 +21,16 @@ trait KafkaRestRoutes extends JsonSupport {
 
   lazy val log = Logging(system, classOf[KafkaRestRoutes])
 
-  //def kafkaProducerActor: ActorRef
+  def kafkaProducerActor: ActorRef
 
   implicit lazy val timeout = Timeout(5.seconds)
 
+  val message = Message(List(Record("hello")))
   lazy val kafkaRestRoutes: Route =
     pathPrefix("topics" / Segment) { topic ⇒
       pathEnd {
         post {
+          // Parse request body into Json object
           entity(as[Message]) { message ⇒
             val kafkaProducerActor: ActorRef = system.actorOf(KafkaProducerActor.props)
             val future: Future[ActionPerformed] =
@@ -37,10 +39,10 @@ trait KafkaRestRoutes extends JsonSupport {
             onSuccess(future) { result ⇒
               complete((StatusCodes.Created, result))
             }
-          } // end of 'entity'
+          } // End of 'entity'
         } ~
-        // For routing test
-        get {
+        // For routing test only
+        options {
           complete((StatusCodes.OK, ActionPerformed("OK")))
         }
       }
