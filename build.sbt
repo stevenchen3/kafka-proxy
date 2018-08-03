@@ -26,12 +26,22 @@ lazy val commonSettings = Seq(
   resolvers += Resolver.sonatypeRepo("releases")
 )
 
+// Path to where the grpc-java codegen compiler is installed
+val grpcJavaPluginPath = "/usr/local/bin/protoc-gen-grpc-java"
+
 lazy val root = Project(id = "kafka-proxy", base = file("."))
   .enablePlugins(ProtobufPlugin)
   .settings(commonSettings: _*)
-  .settings(fork in run := true)
+  .settings(fork in run  := true)
   .settings(fork in Test := true)
   .settings(libraryDependencies ++= akkaDeps)
   .settings(libraryDependencies ++= akkaHttpDeps)
   .settings(libraryDependencies ++= kafkaDeps)
   .settings(libraryDependencies ++= sl4jDeps)
+  .settings(libraryDependencies ++= gRpcDeps)
+  .settings(protobufProtocOptions in ProtobufConfig ++= Seq( // Generates gRPC Java classes
+    s"--plugin=protoc-gen-grpc-java=$grpcJavaPluginPath",
+    // Output to where other generated protobuf Java classes reside
+    // By default, SBT will compile sources from this directory
+    "--grpc-java_out=" + sourceManaged.value + "/main/compiled_protobuf"
+  ))

@@ -35,4 +35,8 @@ object Dependencies {
     "org.slf4j" % "slf4j-api" % "1.7.5",
     "org.slf4j" % "slf4j-log4j12" % "1.7.5"
   )
+
+  val gRpcDeps = Seq(
+    "io.grpc" % "grpc-all" % "1.14.0"
+  )
 }
