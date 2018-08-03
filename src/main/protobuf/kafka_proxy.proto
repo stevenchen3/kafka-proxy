@@ -7,19 +7,21 @@ option objc_class_prefix = "HLW";
 
 package producer;
 
-// The kafka producer service definition.
-service Producer {
+// The Kafka RPC proxy service definition.
+service KafkaProxyRpc {
   // Publishes a message to Kafka broker
-  rpc Publish (PublishRequest) returns (PublishReply) {}
+  rpc Publish (KafkaMessage) returns (PublishReply) {}
 }
 
-// The request message containing the user's name.
-message PublishRequest {
+// The request message containing the topic name and
+// a list of string records
+message KafkaMessage {
   string topic = 1;
   repeated string records = 2;
 }
 
-// The response message containing the greetings
+// The response message containing the status code and message
 message PublishReply {
-  string message = 1;
+  int32 status = 1;
+  string message = 2;
 }
