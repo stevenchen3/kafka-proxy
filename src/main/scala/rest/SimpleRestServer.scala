@@ -11,7 +11,7 @@ import scala.concurrent.ExecutionContext
 final class SimpleRestServer extends KafkaRestRoutes {
   implicit val system: ActorSystem = ActorSystem("kafka-rest-system")
   implicit val materializer: ActorMaterializer = ActorMaterializer()
-  implicit val executionContext: ExecutionContext = system.dispatcher
+  implicit val ec: ExecutionContext = system.dispatchers.lookup("my-blocking-dispatcher")
 
   override lazy val log = Logging(system, classOf[SimpleRestServer])
 
