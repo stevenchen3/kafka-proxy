@@ -1,8 +1,11 @@
 # Kafka Proxy
 
-A simple proxy built atop Akka HTTP for Apache Kafka
+Inspired by [Confluent REST Proxy](https://github.com/confluentinc/kafka-rest) and
+[Kafka-Pixy](https://github.com/mailgun/kafka-pixy). Give it a try to implement a
+simple REST/gRPC proxy built atop Akka HTTP for Apache Kafka using Scala.
 
-## Installing `protoc-gen-grpc-java` plugin from source
+
+## Installing `grpc-java` plugin from source
 
 The plugin `protoc-gen-grpc-java` is required by `sbt` in order to automatically generate gRPC
 related Java source files in `Compile` scope. Before proceeding to the following steps, make
@@ -24,6 +27,7 @@ Make sure that you have Docker and Docker Compose installed properly, and then d
 sbt assembly
 docker-compose build
 ```
+
 
 # Changelog
 
