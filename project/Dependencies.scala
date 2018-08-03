@@ -30,4 +30,9 @@ object Dependencies {
     "org.apache.kafka" %% "kafka",
     "org.apache.kafka" % "kafka-clients"
   ).map(_ % kafkaVersion)
+
+  val sl4jDeps = Seq(
+    "org.slf4j" % "slf4j-api" % "1.7.5",
+    "org.slf4j" % "slf4j-log4j12" % "1.7.5"
+  )
 }
