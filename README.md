@@ -25,3 +25,10 @@ sbt assembly
 docker-compose build
 ```
 
+# Changelog
+
++ [03/08/2018] A simple publish REST endpoint created: `POST /topics/{topic-name}` which expects
+
+  ```
+  {"records":[{"value":"foobar"}]}
+  ```
