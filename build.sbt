@@ -45,3 +45,10 @@ lazy val root = Project(id = "kafka-proxy", base = file("."))
     // By default, SBT will compile sources from this directory
     "--grpc-java_out=" + sourceManaged.value + "/main/compiled_protobuf"
   ))
+
+assemblyMergeStrategy in assembly := {
+  case "META-INF/io.netty.versions.properties" ⇒ MergeStrategy.first
+  case x ⇒
+    val oldStrategy = (assemblyMergeStrategy in assembly).value
+    oldStrategy(x)
+}

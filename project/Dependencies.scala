@@ -36,7 +36,11 @@ object Dependencies {
     "org.slf4j" % "slf4j-log4j12" % "1.7.5"
   )
 
+  lazy val gRpcJavaVersion = "1.14.0"
   val gRpcDeps = Seq(
-    "io.grpc" % "grpc-all" % "1.14.0"
-  )
+    "io.grpc" % "grpc-protobuf",
+    "io.grpc" % "grpc-stub",
+    "io.grpc" % "grpc-netty",
+    "io.grpc" % "grpc-testing"
+  ).map(_ % gRpcJavaVersion)
 }
