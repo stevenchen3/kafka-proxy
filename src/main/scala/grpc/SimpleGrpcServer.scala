@@ -1,4 +1,4 @@
-package io.alphash.kafka.proxy.rpc
+package io.alphash.kafka.proxy.grpc
 
 import io.alphash.kafka.proxy.producer._
 import io.alphash.kafka.proxy.rest.{Record, Message}
