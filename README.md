@@ -36,3 +36,4 @@ docker-compose build
   ```
   {"records":[{"value":"foobar"}]}
   ```
++ [04/08/2018] A simple gRPC server created
