@@ -2,14 +2,19 @@ package io.alphash.kafka.proxy.rest
 
 import java.util.Properties;
 
+import scala.io.Source
+
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.ProducerConfig
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.common.utils.Utils
 
-final class SimpleKafkaProducerProxy extends KafkaProducerProxy {
+object KafkaProducerPerformance extends App with KafkaProducerProxy {
   lazy val producerConfig =
     System.getProperty("config.file", "/etc/kafka-proxy/producer.properties")
+  lazy val payload: String = Source.fromFile(
+    System.getProperty("payload.file", "/etc/kafka-proxy/payload.txt")
+  ).getLines.mkString
 
   lazy val props: Properties = {
     val properties: Properties = new Properties()
@@ -25,29 +30,17 @@ final class SimpleKafkaProducerProxy extends KafkaProducerProxy {
     properties
   }
 
-  private val producer: KafkaProducer[String, String] = new KafkaProducer(props)
-
-  lazy val base64Decode: Boolean =
-    props.getProperty("enable.base64.decode", "false").toBoolean
-
-  def getPayload(record: Record, base64Decode: Boolean): String = {
-    import java.util.Base64
-    if (base64Decode) {
-      new String(Base64.getDecoder.decode(record.value))
-    } else {
-      record.value
-    }
-  }
-
-  def publish(topic: String, message: Message): Unit= {
-    message.records.foreach { record ⇒
-      // Asynchronously
-      producer.send(new ProducerRecord(topic, getPayload(record, base64Decode)))
+  def publish(topic: String = "scala", message: Message = Message(List[Record]())): Unit= {
+    val producer: KafkaProducer[String, String] = new KafkaProducer(props)
+    val start: Long = System.currentTimeMillis
+    for (x <- 1 to 100000) {
+      producer.send(new ProducerRecord(topic, payload))
     }
     producer.flush
+    producer.close
+    val end: Long = System.currentTimeMillis
+    println(s"Elapsed time: ${(end - start) / 1000} seconds")
   }
-}
 
-object SimpleKafkaProducerProxy {
-  def apply() = new SimpleKafkaProducerProxy()
+  publish()
 }

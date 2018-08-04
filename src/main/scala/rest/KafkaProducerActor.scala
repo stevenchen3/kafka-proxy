@@ -14,10 +14,12 @@ object KafkaProducerActor {
 
 class KafkaProducerActor extends Actor with ActorLogging {
   import KafkaProducerActor._
+  val proxy = SimpleKafkaProducerProxy()
 
   def receive: Receive = {
     case Publish(topic, message) ⇒
       SimpleKafkaProducerProxy().publish(topic, message)
+      proxy.publish(topic, message)
       sender() ! ActionPerformed("OK")
     case _ ⇒ sender() ! ActionPerformed("Bad request")
   }
