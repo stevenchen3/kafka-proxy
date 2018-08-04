@@ -32,4 +32,15 @@ function configure() {
 
 configure ${KAFKA_PROXY_HOME}/config/producer.properties
 JVM_OPTS="-Xms${HEAP_SIZE_MIN:-1g} -Xmx${HEAP_SIZE_MAX:-2g}"
-exec java ${JVM_OPTS} -cp ${KAFKA_PROXY_HOME}/lib/* io.alphash.kafka.proxy.rest.SimpleRestServer
+
+case "$1" in
+rest)
+  exec java ${JVM_OPTS} -cp ${KAFKA_PROXY_HOME}/lib/* io.alphash.kafka.proxy.rest.SimpleRestServer
+  ;;
+grpc)
+  exec java ${JVM_OPTS} -cp ${KAFKA_PROXY_HOME}/lib/* io.alphash.kafka.proxy.grpc.SimpleGrpcServer
+  ;;
+*)
+  echo "Unknown argument $1, expects 'rest' or 'grpc'"
+  exit 1
+esac

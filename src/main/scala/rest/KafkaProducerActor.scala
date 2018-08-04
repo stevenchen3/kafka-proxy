@@ -1,5 +1,7 @@
 package io.alphash.kafka.proxy.rest
 
+import io.alphash.kafka.proxy.producer._
+
 import akka.actor.{Actor, ActorLogging, Props}
 
 final case class Record(value: String)

@@ -1,5 +1,7 @@
 package io.alphash.kafka.proxy.rest
 
+import io.alphash.kafka.proxy.producer._
+
 import java.util.Properties;
 
 import scala.io.Source

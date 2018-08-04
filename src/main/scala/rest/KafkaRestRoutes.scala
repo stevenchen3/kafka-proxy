@@ -2,6 +2,8 @@ package io.alphash.kafka.proxy.rest
 
 import KafkaProducerActor._
 
+import io.alphash.kafka.proxy.producer._
+
 import akka.actor.ActorSystem
 import akka.event.Logging
 import akka.http.scaladsl.server.Directives._

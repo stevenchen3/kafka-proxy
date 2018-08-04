@@ -25,4 +25,4 @@ EXPOSE 8080
 
 WORKDIR ${KAFKA_PROXY_HOME}
 
-ENTRYPOINT ["start-proxy.sh"]
+ENTRYPOINT ["start-proxy.sh", "rest"]

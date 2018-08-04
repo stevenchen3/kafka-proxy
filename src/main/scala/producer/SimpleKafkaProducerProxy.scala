@@ -1,6 +1,8 @@
-package io.alphash.kafka.proxy.rest
+package io.alphash.kafka.proxy.producer
 
-import java.util.Properties;
+import io.alphash.kafka.proxy.rest.{Record, Message}
+
+import java.util.Properties
 
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.ProducerConfig
@@ -39,7 +41,7 @@ final class SimpleKafkaProducerProxy extends KafkaProducerProxy {
     }
   }
 
-  def publish(topic: String, message: Message): Unit= {
+  def publish(topic: String, message: Message): Unit = {
     message.records.foreach { record ⇒
       // Asynchronously
       producer.send(new ProducerRecord(topic, getPayload(record, base64Decode)))
