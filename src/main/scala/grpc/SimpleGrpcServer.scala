@@ -3,14 +3,11 @@ package io.alphash.kafka.proxy.grpc
 import io.alphash.kafka.proxy.producer._
 import io.alphash.kafka.proxy.rest.{Record, Message}
 
-import io.grpc.Server
-import io.grpc.ServerBuilder
+import io.grpc.{Server, ServerBuilder}
 import io.grpc.stub.StreamObserver
 
-class SimpleGrpcServer {
-  val port: Int = 50051
-
-  lazy val server: Server =
+class SimpleGrpcServer(val port: Int) {
+  private lazy val server: Server =
     ServerBuilder.forPort(port).addService(new KafkaProxyImpl()).build
 
   def start(): Unit = {
@@ -42,6 +39,7 @@ class KafkaProxyImpl extends KafkaProxyGrpc.KafkaProxyImplBase {
     import collection.JavaConverters._
     val topic: String = request.getTopic
     val records: Seq[Record] = request.getRecordsList.asScala.map(Record(_))
+    println(s"Received: ${topic}, ${records}")
     proxy.publish(topic, Message(records))
 
     val reply = PublishReply.newBuilder.setStatus(201).setMessage("OK").build
@@ -51,10 +49,11 @@ class KafkaProxyImpl extends KafkaProxyGrpc.KafkaProxyImplBase {
 }
 
 object SimpleGrpcServer extends App {
-  def apply(): SimpleGrpcServer = new SimpleGrpcServer()
+  def apply(port: Int): SimpleGrpcServer = new SimpleGrpcServer(port)
 
   def start(): Unit = {
-    val server = new SimpleGrpcServer()
+    val port: Int = System.getProperty("server.port", "50051").toInt
+    val server = SimpleGrpcServer(port)
     server.start
     server.blockUntilShutdown
   }
