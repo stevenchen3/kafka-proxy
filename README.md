@@ -2,7 +2,9 @@
 
 Inspired by [Confluent REST Proxy](https://github.com/confluentinc/kafka-rest) and
 [Kafka-Pixy](https://github.com/mailgun/kafka-pixy). Give it a try to implement a
-simple REST/gRPC proxy built atop Akka HTTP for Apache Kafka using Scala.
+simple REST/gRPC proxy built atop Akka HTTP for Apache Kafka using Scala and carry
+out some benchmarks. The codes are for quick prototyping purpose, and have not yet
+been covered by unit tests.
 
 
 ## Installing `grpc-java` plugin from source
