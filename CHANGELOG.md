@@ -6,3 +6,4 @@
   {"records":[{"value":"foobar"}]}
   ```
 + [04/08/2018] A simple gRPC server is created
++ [05/08/2018] A simple gRPC client is created
