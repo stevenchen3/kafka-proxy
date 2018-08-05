@@ -23,7 +23,8 @@ cp build/exe/java_plugin/protoc-gen-grpc-java /usr/local/bin/
 
 ## Building the Docker image
 
-Make sure that you have Docker and Docker Compose installed properly, and then do the following:
+Make sure that you have Docker, Docker Compose and Protocol Buffers compiler (i.e., `protoc`)
+installed properly, and then do the following:
 
 ```
 sbt assembly
