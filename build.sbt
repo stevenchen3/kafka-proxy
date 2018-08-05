@@ -27,7 +27,7 @@ lazy val commonSettings = Seq(
 )
 
 // Path to where the grpc-java codegen compiler is installed
-val grpcJavaPluginPath = "/usr/local/bin/protoc-gen-grpc-java"
+lazy val grpcJavaPluginPath = "/usr/local/bin/protoc-gen-grpc-java"
 
 lazy val root = Project(id = "kafka-proxy", base = file("."))
   .enablePlugins(ProtobufPlugin)
@@ -43,7 +43,7 @@ lazy val root = Project(id = "kafka-proxy", base = file("."))
     s"--plugin=protoc-gen-grpc-java=$grpcJavaPluginPath",
     // Output to where other generated protobuf Java classes reside
     // By default, SBT will compile sources from this directory
-    "--grpc-java_out=" + sourceManaged.value + "/main/compiled_protobuf"
+    s"--grpc-java_out=${sourceManaged.value}/main/compiled_protobuf"
   ))
 
 assemblyMergeStrategy in assembly := {
