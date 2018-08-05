@@ -21,7 +21,7 @@ RUN set -ex && \
     ln -s ${KAFKA_PROXY_HOME}/bin/* /usr/local/bin/ && \
     ln -s ${KAFKA_PROXY_HOME}/config/producer.properties ${KAFKA_PROXY_CONF}/
 
-EXPOSE 8080
+EXPOSE 8080 50051
 
 WORKDIR ${KAFKA_PROXY_HOME}
 
