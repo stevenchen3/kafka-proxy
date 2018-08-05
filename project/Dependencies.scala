@@ -18,24 +18,6 @@ object Dependencies {
     "com.typesafe.akka" %% "akka-http-xml"
   ).map(_ % akkaHttpVersion)
 
-  // Scalatest library dependencies
-  val scalatestDeps = Seq(
-    "org.scalatest" %% "scalatest" % "3.0.1" % "test",
-    "org.scalamock" %% "scalamock-scalatest-support" % "3.5.0" % Test
-  )
-
-  // Apache Kafka libaray dependencies
-  lazy val kafkaVersion = "1.1.0"
-  val kafkaDeps = Seq(
-    "org.apache.kafka" %% "kafka",
-    "org.apache.kafka" % "kafka-clients"
-  ).map(_ % kafkaVersion)
-
-  val sl4jDeps = Seq(
-    "org.slf4j" % "slf4j-api" % "1.7.5",
-    "org.slf4j" % "slf4j-log4j12" % "1.7.5"
-  )
-
   lazy val gRpcJavaVersion = "1.14.0"
   val gRpcDeps = Seq(
     "io.grpc" % "grpc-protobuf",
@@ -43,4 +25,24 @@ object Dependencies {
     "io.grpc" % "grpc-netty",
     "io.grpc" % "grpc-testing"
   ).map(_ % gRpcJavaVersion)
+
+  // Apache Kafka libaray dependencies
+  lazy val kafkaVersion = "1.1.0"
+  val kafkaDeps = Seq(
+    "org.apache.kafka" %% "kafka",
+    "org.apache.kafka" %  "kafka-clients"
+  ).map(_ % kafkaVersion)
+
+  // Scalatest library dependencies
+  val scalatestDeps = Seq(
+    "org.scalatest" %% "scalatest" % "3.0.1" % "test",
+    "org.scalamock" %% "scalamock-scalatest-support" % "3.5.0" % Test
+  )
+
+  // sl4j logging library dependencies, required to include in assembly
+  lazy val sl4jVersion = "1.7.5"
+  val sl4jDeps = Seq(
+    "org.slf4j" % "slf4j-api",
+    "org.slf4j" % "slf4j-log4j12"
+  ).map(_ % sl4jVersion)
 }
