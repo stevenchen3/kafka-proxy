@@ -20,7 +20,7 @@ trait KafkaRestRoutes extends JsonSupport {
 
   lazy val log = Logging(system, classOf[KafkaRestRoutes])
 
-  val proxy = SimpleKafkaProducerProxy()
+  val proxy: KafkaProducerProxy
 
   val message = Message(List(Record("hello")))
   lazy val kafkaRestRoutes: Route =
@@ -28,7 +28,7 @@ trait KafkaRestRoutes extends JsonSupport {
       pathEnd {
         post {
           entity(as[Message]) { message ⇒
-            val future = Future {
+            val future: Future[ActionPerformed] = Future {
               proxy.publish(topic, message)
               ActionPerformed("OK")
             }
