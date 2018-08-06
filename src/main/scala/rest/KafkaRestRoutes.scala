@@ -12,15 +12,16 @@ import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.server.directives.MethodDirectives.post
 import akka.http.scaladsl.server.directives.RouteDirectives.complete
 
-import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 
 trait KafkaRestRoutes extends JsonSupport {
   implicit def system: ActorSystem
-
-  lazy val log = Logging(system, classOf[KafkaRestRoutes])
+  implicit def blockingDispatcher: ExecutionContext
 
   val proxy: KafkaProducerProxy
+
+  lazy val log = Logging(system, classOf[KafkaRestRoutes])
 
   lazy val kafkaRestRoutes: Route =
     pathPrefix("topics" / Segment) { topic ⇒
