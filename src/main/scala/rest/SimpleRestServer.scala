@@ -7,12 +7,10 @@ import akka.event.Logging
 import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
 
-import scala.concurrent.ExecutionContext
-
 final class SimpleRestServer extends KafkaRestRoutes {
   implicit val system: ActorSystem = ActorSystem("kafka-rest")
   implicit val materializer: ActorMaterializer = ActorMaterializer()
-  implicit val ec: ExecutionContext = system.dispatchers.lookup("http-blocking-dispatcher")
+  implicit val blockingDispatcher = system.dispatchers.lookup("http-blocking-dispatcher")
 
   override lazy val log = Logging(system, classOf[SimpleRestServer])
 

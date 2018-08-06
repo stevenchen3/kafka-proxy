@@ -11,7 +11,7 @@ import org.apache.kafka.common.utils.Utils
 
 final class SimpleKafkaProducerProxy extends KafkaProducerProxy {
   lazy val producerConfig =
-    System.getProperty("config.file", "/etc/kafka-proxy/producer.properties")
+    System.getProperty("producer.config", "/etc/kafka-proxy/producer.properties")
 
   lazy val props: Properties = {
     val properties: Properties = new Properties()

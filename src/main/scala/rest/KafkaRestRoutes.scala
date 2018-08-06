@@ -22,7 +22,6 @@ trait KafkaRestRoutes extends JsonSupport {
 
   val proxy: KafkaProducerProxy
 
-  val message = Message(List(Record("hello")))
   lazy val kafkaRestRoutes: Route =
     pathPrefix("topics" / Segment) { topic ⇒
       pathEnd {
