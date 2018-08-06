@@ -16,7 +16,9 @@ class SimpleGrpcClient(val host: String, val port: Int) {
     import collection.JavaConverters._
     val request: KafkaMessage =
       KafkaMessage.newBuilder.setTopic(topic).addAllRecords(records.asJava).build
-    val response = blockingStub.publish(request)
+    // Enable client side compression
+    val response = blockingStub.withCompression("gzip").publish(request)
+    //val response = blockingStub.publish(request)
     println(s"Reply: ${response.getStatus}, ${response.getMessage}")
   }
 }
