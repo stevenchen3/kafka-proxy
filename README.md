@@ -30,3 +30,13 @@ installed properly, and then do the following:
 sbt assembly
 docker-compose build
 ```
+
+## Gotcha
+
++ `dyld: Library not loaded` error during compilation
+
+```
+dyld: Library not loaded: /usr/local/opt/protobuf/lib/libprotoc.13.dylib
+```
+
+Reinstalling `grpc-java` to fix it.
