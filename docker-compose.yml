@@ -8,6 +8,13 @@ services:
     image: centos-base:jre8
     entrypoint: /bin/bash
 
+  builder:
+    build:
+      context: docker-common
+      dockerfile: Dockerfile.scala-sbt
+    image: builder:scala-sbt
+    entrypoint: /bin/bash
+
   kafka-proxy:
     build:
       context: .
@@ -18,3 +25,4 @@ services:
     image: kafka-proxy:0.1.0-rc1
     depends_on:
       - base
+      - builder

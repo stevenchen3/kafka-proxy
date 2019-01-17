@@ -1,5 +1,6 @@
 .git
-project
+*/*/project*
+*/*/target*
 target/streams
 target/protobuf_external
 target/resolution-cache
