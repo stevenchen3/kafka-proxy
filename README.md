@@ -27,7 +27,6 @@ Make sure that you have Docker, Docker Compose and Protocol Buffers compiler (i.
 installed properly, and then do the following:
 
 ```
-sbt assembly
 docker-compose build
 ```
 
