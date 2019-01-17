@@ -2,6 +2,8 @@
 FROM builder:scala-sbt AS builder
 
 COPY build.sbt version.sbt src project /build/
+COPY src     /build/src
+COPY project /build/project
 
 RUN set -ex && \
     cd /build && \

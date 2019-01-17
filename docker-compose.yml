@@ -21,7 +21,7 @@ services:
       dockerfile: docker/Dockerfile
       args:
         - SCALA_VERSION=2.12
-        - KAFKA_PROXY_VERSION=0.1.0-SNAPSHOT
+        - KAFKA_PROXY_VERSION=0.1.0-rc1
     image: kafka-proxy:0.1.0-rc1
     depends_on:
       - base
