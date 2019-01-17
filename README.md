@@ -39,4 +39,4 @@ docker-compose build
 dyld: Library not loaded: /usr/local/opt/protobuf/lib/libprotoc.13.dylib
 ```
 
-Reinstalling `grpc-java` to fix it.
+Reinstall `grpc-java` to fix it.
