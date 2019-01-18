@@ -21,7 +21,7 @@ The plugin `protoc-gen-grpc-java` is required by `sbt` in order to automatically
 related Java source files in `Compile` scope. Before proceeding to the following steps, make
 sure that you have [Gradle](https://gradle.org/install/) properly.
 
-```
+```bash
 git clone --recursive git@github.com:grpc/grpc-java.git
 cd grpc-java/compiler
 ../gradlew java_pluginExecutable
@@ -29,12 +29,19 @@ cd grpc-java/compiler
 cp build/exe/java_plugin/protoc-gen-grpc-java /usr/local/bin/
 ```
 
+### Compiling
+
+```bash
+sbt compile
+sbt assembly
+```
+
 ## Building the Docker image
 
 Make sure that you have Docker, Docker Compose and Protocol Buffers compiler (i.e., `protoc`)
 installed properly, and then do the following:
 
-```
+```bash
 docker-compose build
 ```
 
@@ -42,7 +49,7 @@ docker-compose build
 
 + `dyld: Library not loaded` error during compilation
 
-```
+```bash
 dyld: Library not loaded: /usr/local/opt/protobuf/lib/libprotoc.13.dylib
 ```
 
