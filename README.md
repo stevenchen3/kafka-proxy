@@ -7,7 +7,15 @@ out some benchmarks. The codes are for quick prototyping purpose, and have not y
 been covered by unit tests.
 
 
-## Installing `grpc-java` plugin from source
+## Compiling the source on bare-metal
+
+Prerequisites:
+- JDK 1.8
+- SBT
+- Protobuf 3.0.0 or above
+- `grpc-java` codegen compiler plugin
+
+### Installing `grpc-java` plugin from source
 
 The plugin `protoc-gen-grpc-java` is required by `sbt` in order to automatically generate gRPC
 related Java source files in `Compile` scope. Before proceeding to the following steps, make
