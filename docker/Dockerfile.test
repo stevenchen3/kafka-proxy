@@ -1,0 +1,5 @@
+FROM builder:dev
+
+WORKDIR /build
+
+ENTRYPOINT ["/bin/bash", "-c", "sbt test"]

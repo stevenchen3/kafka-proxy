@@ -7,7 +7,7 @@ out some benchmarks. The codes are for quick prototyping purpose, and have not y
 been covered by unit tests.
 
 
-## Compiling the source on bare-metal
+## Building the source on bare-metal
 
 Prerequisites:
 - JDK 1.8
@@ -28,21 +28,39 @@ cd grpc-java/compiler
 cp build/exe/java_plugin/protoc-gen-grpc-java /usr/local/bin/
 ```
 
-### Compiling
+### Building
+
+Compile the source codes and run the tests:
 
 ```bash
 sbt compile
+sbt test
 sbt assembly
 ```
 
-## Building the Docker image
 
-Make sure that you have Docker, Docker Compose and Protocol Buffers compiler (i.e., `protoc`)
-installed properly, and then do the following:
+## Building the source inside Docker
+
+Prerequisites:
+- Docker
+- Docker Compose
+
+### Building
+
+Compile the source codes and run the tests (it may take quite some time for the first time):
+
+```bash
+docker-compose run test
+```
+
+### Building the Docker image
+
+Below will create a Docker image tagged as `kafka-proxy:0.1.0-rc1`.
 
 ```bash
 docker-compose build
 ```
+
 
 ## Gotcha
 
