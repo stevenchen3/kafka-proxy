@@ -18,8 +18,7 @@ Prerequisites:
 ### Installing `grpc-java` plugin from source
 
 The plugin `protoc-gen-grpc-java` is required by `sbt` in order to automatically generate gRPC
-related Java source files in `Compile` scope. Before proceeding to the following steps, make
-sure that you have [Gradle](https://gradle.org/install/) properly.
+related Java source files in `Compile` scope.
 
 ```bash
 git clone --recursive git@github.com:grpc/grpc-java.git
