@@ -10,15 +10,17 @@ been covered by unit tests.
 ## Building the source on bare-metal
 
 Prerequisites:
+
 - JDK 1.8
-- SBT
+- SBT 0.13.x or 1.0.x
 - Protobuf 3.0.0 or above
 - `grpc-java` codegen compiler plugin
 
 ### Installing `grpc-java` plugin from source
 
-The plugin `protoc-gen-grpc-java` is required by `sbt` in order to automatically generate gRPC
-related Java source files in `Compile` scope.
+The plugin `protoc-gen-grpc-java` is required by `sbt-protobuf` plugin in order to
+automatically generate gRPC related Java source files in `Compile` scope. Below is
+one way to get this `protoc-gen-grpc-java` binary.
 
 ```bash
 git clone --recursive git@github.com:grpc/grpc-java.git
@@ -27,6 +29,9 @@ cd grpc-java/compiler
 ../gradlew test
 cp build/exe/java_plugin/protoc-gen-grpc-java /usr/local/bin/
 ```
+
+See [here](https://github.com/grpc/grpc-java/blob/master/COMPILING.md#how-to-build-code-generation-plugin)
+for details.
 
 ### Building
 
@@ -41,13 +46,17 @@ sbt assembly
 
 ## Building the source inside Docker
 
+Alternatively, we can build the source using Docker in that we could possibly avoid complex 
+dependencies on bare-metal environment.
+
 Prerequisites:
-- Docker
-- Docker Compose
+
+- Docker 18 or above
+- Docker Compose 1.23 or above
 
 ### Building
 
-Compile the source codes and run the tests (it may take quite some time for the first time):
+Compile the source codes and run the tests (it may take some time for the first time):
 
 ```bash
 docker-compose run test
