@@ -3,7 +3,7 @@ import Dependencies._
 lazy val commonSettings = Seq(
   name := "kafka-proxy",
   organization := "io.alphash",
-  scalaVersion := "2.12.4",
+  scalaVersion := "2.12.8",
   scalacOptions in Compile ++= Seq(
     "-encoding",
     "UTF-8",
@@ -23,10 +23,14 @@ lazy val commonSettings = Seq(
   ),
   javaOptions in Test ++= Seq("-Xms256m", "-Xmx2g", "-Dconfig.resource=test.conf"),
   javaOptions in run  ++= Seq("-Xms256m", "-Xmx2g", "-XX:+UseParallelGC", "-server"),
-  resolvers += Resolver.sonatypeRepo("releases")
+  resolvers ++= Seq(
+    Resolver.sonatypeRepo("releases"),
+    Resolver.typesafeRepo("releases")
+  )
 )
 
-// Path to where the grpc-java codegen compiler is installed
+// Path to where the grpc-java codegen compiler (i.e., 'protoc-gen-grpc-java' binary) is installed
+// See https://github.com/grpc/grpc-java/tree/master/compiler for details
 lazy val grpcJavaPluginPath = "/usr/local/bin/protoc-gen-grpc-java"
 
 lazy val root = Project(id = "kafka-proxy", base = file("."))
@@ -39,7 +43,8 @@ lazy val root = Project(id = "kafka-proxy", base = file("."))
   .settings(libraryDependencies ++= kafkaDeps)
   .settings(libraryDependencies ++= sl4jDeps)
   .settings(libraryDependencies ++= gRpcDeps)
-  .settings(protobufProtocOptions in ProtobufConfig ++= Seq( // Generates gRPC Java classes
+  // To generate gRPC Java classes, below protobuf options are required
+  .settings(protobufProtocOptions in ProtobufConfig ++= Seq(
     s"--plugin=protoc-gen-grpc-java=$grpcJavaPluginPath",
     // Output to where other generated protobuf Java classes reside
     // By default, SBT will compile sources from this directory
