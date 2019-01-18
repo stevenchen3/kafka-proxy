@@ -16,11 +16,11 @@ Prerequisites:
 - Protobuf 3.0.0 or above
 - `grpc-java` codegen compiler plugin
 
-### Installing `grpc-java` plugin from source
+### Compiling `protoc-gen-grpc-java` from source
 
-The plugin `protoc-gen-grpc-java` is required by `sbt-protobuf` plugin in order to
-automatically generate gRPC related Java source files in `Compile` scope. Below is
-one way to get this `protoc-gen-grpc-java` binary.
+The `protoc-gen-grpc-java` binary is required by `sbt-protobuf` plugin in order to
+automatically generate gRPC related Java source files in SBT `Compile` scope. Below
+is one way to get this `protoc-gen-grpc-java` binary.
 
 ```bash
 git clone --recursive git@github.com:grpc/grpc-java.git
@@ -46,8 +46,8 @@ sbt assembly
 
 ## Building the source inside Docker
 
-Alternatively, we can build the source using Docker in that we could possibly avoid complex 
-dependencies on bare-metal environment.
+Alternatively, we can build the source using Docker in that we could possibly avoid complex
+dependencies on bare-metal environment as they have been well configured inside Docker image.
 
 Prerequisites:
 
