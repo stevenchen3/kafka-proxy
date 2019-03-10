@@ -1,28 +1,12 @@
 version: "3"
 
 services:
-  base:
-    build:
-      context: docker-common
-      dockerfile: Dockerfile.jre8
-    image: centos-base:jre8
-    entrypoint: /bin/bash
-
-  builder:
-    build:
-      context: docker-common
-      dockerfile: Dockerfile.scala-sbt
-    image: builder:scala-sbt
-    entrypoint: /bin/bash
-
   dev:
     build:
       context: .
       dockerfile: docker/Dockerfile.dev
     image: builder:dev
     entrypoint: /bin/bash
-    depends_on:
-      - builder
 
   test:
     build:
@@ -43,6 +27,3 @@ services:
     image: kafka-proxy:0.1.0-rc1
     # Disable running this docker container in docker-compose.yml
     entrypoint: /bin/bash
-    depends_on:
-      - base
-      - builder

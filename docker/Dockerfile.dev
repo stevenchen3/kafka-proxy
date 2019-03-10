@@ -1,4 +1,4 @@
-FROM builder:scala-sbt
+FROM alphash/centos7:sbt-0.13.15
 
 COPY build.sbt version.sbt /build/
 COPY src     /build/src
@@ -6,4 +6,4 @@ COPY project /build/project
 
 RUN set -ex && \
     cd /build && \
-    sbt compile; sbt clean; echo 0
+    sbt compile || true

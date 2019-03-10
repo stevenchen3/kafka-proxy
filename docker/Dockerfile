@@ -7,7 +7,7 @@ RUN set -ex && \
 
 
 # Building docker image for 'kafka-proxy'
-FROM centos-base:jre8
+FROM alphash/centos7:jre-1.8
 
 ARG KAFKA_PROXY_VERSION=0.9.0-SNAPSHOT
 ARG SCALA_VERSION=2.12
