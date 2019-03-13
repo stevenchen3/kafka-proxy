@@ -4,6 +4,7 @@ lazy val commonSettings = Seq(
   name := "kafka-proxy",
   organization := "io.alphash",
   scalaVersion := "2.12.8",
+  addCompilerPlugin(scalafixSemanticdb),
   scalacOptions in Compile ++= Seq(
     "-encoding",
     "UTF-8",
@@ -11,7 +12,9 @@ lazy val commonSettings = Seq(
     "-deprecation",
     "-feature",
     "-unchecked",
-    "-Xlint"
+    "-Xlint",
+    "-Yrangepos",
+    "-Ywarn-unused-import"
   ),
   javacOptions in Compile ++= Seq(
     "-source",
