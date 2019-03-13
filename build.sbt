@@ -1,5 +1,10 @@
 import Dependencies._
 
+addCommandAlias(
+  "fixCheck",
+  "; compile:scalafix --check ; test:scalafix --check"
+)
+
 lazy val commonSettings = Seq(
   name := "kafka-proxy",
   organization := "io.alphash",

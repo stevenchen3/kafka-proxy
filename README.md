@@ -41,6 +41,9 @@ Compile the source codes and run the tests:
 sbt compile
 sbt test
 sbt assembly
+
+# Run scalafix check
+sbt fixCheck
 ```
 
 
